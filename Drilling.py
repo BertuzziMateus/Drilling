@@ -216,8 +216,8 @@ def tension_in_section1(Data,R) -> list:
             l1_data.append(l1)
             torque_data.append(torque)
         
-        if l1 == 1410:
-            print('a')
+        # if l1 == 1410:
+        #     print('a')
 
         if round(l1,1) == Data.max:
             condition = True
