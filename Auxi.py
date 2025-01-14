@@ -285,6 +285,12 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
         
         if DNS[0] > 0: # DN POSTIVO SEM TROCA DE SINAL
 
+            #print('positivo')
+
+                        
+            # if R == 600:
+            #     print('positivo',l1,R)
+
            
             A = Data.lambd_drill*Data.g*R
 
@@ -299,11 +305,8 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
             medial_N_force = B3*(1-np.cos(angle)) + B2*np.sin(angle) + (K/Data.µ)*( (np.exp(Data.µ*angle)) - 1 )
 
-            #print(medial_N_force,l1,R)
 
             frictional_torque_2 = ( Data.µ * medial_N_force* Data.d_ext_drill ) / 2
-
-            #print(frictional_torque_2,l1,R)
 
             fat3_command = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_command) )* Data.lambd_command* lc*Data.g* np.sin(angle)
             fat3_heavy = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_heavypipe) )* Data.lambd_heavy* Data.lp*Data.g* np.sin(angle)
@@ -320,6 +323,8 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
         else: # DN NEGATIVO SEM TROCA DE SINAL
 
+            #print('negativo')
+
             A = Data.lambd_drill*Data.g*R
             C1 = ( A / ( (1 + Data.µ**2) ) ) * ( ( (Data.µ**2) * ( 1 - (Data.ro_fluid/Data.ro_drillpipe) ) )  - 1 )
             C2 =  - ( (A*Data.µ) / ( (1 + Data.µ**2) ) ) * ( 2 - (Data.ro_fluid/Data.ro_drillpipe) )
@@ -330,16 +335,21 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
             C3 = C1 - ( (1 - (Data.ro_fluid/Data.ro_drillpipe) )* Data.lambd_drill* Data.g*R )
 
-            medial_N_force = C3*(1-np.cos(angle)) + C2*np.sin(angle) + (K/Data.µ)*( (np.exp(Data.µ*angle)) - 1 )
+            medial_N_force = C3*(1-np.cos(angle)) + C2*np.sin(angle) - (K/Data.µ)*( (np.exp(-Data.µ*angle)) - 1 )
 
-            if medial_N_force > 0 :
+            # MUDANÇA DE SINAL DO  - K / DATA.U 
+
+            # if medial_N_force > 0 :
                 
-                print(medial_N_force,l1,R)
+            #     print(medial_N_force,l1,R)
+
+            
+            # if R == 600:
+            #     print('negativo',l1,R)
 
 
             frictional_torque_2 = -(( Data.µ * medial_N_force* Data.d_ext_drill ) / 2)
 
-            #print(frictional_torque_2,l1,R)
                         
             fat3_command = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_command) )* Data.lambd_command* lc*Data.g* np.sin(angle)
             fat3_heavy = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_heavypipe) )* Data.lambd_heavy* Data.lp*Data.g* np.sin(angle)
@@ -355,13 +365,9 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
             torque = frictional_torque_2 + frictional_torque_3
 
 
-    elif condition_signal_change == "Yes": # nega'tive - positive
+    elif condition_signal_change == "Yes": # negative - positive
 
-        # print(angle,'angle')
-        # print(angle_variation[condition_where_change],'angle_change')
-        # print(angle-angle_variation[condition_where_change],'angle dif')
-
-    
+            
         A = Data.lambd_drill*Data.g*R
         C1 = ( A / ( (1 + Data.µ**2) ) ) * ( ( (Data.µ**2) * ( 1 - (Data.ro_fluid/Data.ro_drillpipe) ) )  - 1 )
         C2 =  - ( (A*Data.µ) / ( (1 + Data.µ**2) ) ) * ( 2 - (Data.ro_fluid/Data.ro_drillpipe) )
@@ -370,10 +376,16 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
         C3 = C1 - ( (1 - (Data.ro_fluid/Data.ro_drillpipe) )* Data.lambd_drill* Data.g*R )
 
-        medial_N_force  = -C3*( np.cos(angle_variation[condition_where_change])-np.cos(angle) ) + C2*(np.sin(angle_variation[condition_where_change]) - np.sin(angle)) + (K/Data.µ)*(np.exp(Data.µ*angle_variation[condition_where_change])-np.exp(Data.µ*angle))
+        medial_N_force  = -C3*( np.cos(angle_variation[condition_where_change])-np.cos(angle) ) - C2*(np.sin(angle_variation[condition_where_change]) - np.sin(angle)) - (K/Data.µ)*(np.exp(-Data.µ*angle_variation[condition_where_change])-np.exp(-Data.µ*angle))
 
-        if medial_N_force > 0 :
-                print(medial_N_force,l1,R,'changed')
+        #mudança de sinal apenas pq a gente fez ao contrario os anuglos 
+
+
+        # if medial_N_force > 0 :
+        #         print(medial_N_force,l1,R,'changed')
+
+        # if R == 600:
+        #     print('Change',l1,R)
         
         frictional_torque_2_change = - (( Data.µ * medial_N_force* Data.d_ext_drill ) / 2)
 
@@ -389,11 +401,9 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
         medial_N_force = B3*(1-np.cos(angle_variation[condition_where_change])) + B2*np.sin(angle_variation[condition_where_change]) + (K/Data.µ)*( (np.exp(Data.µ*(angle_variation[condition_where_change]))) - 1 )
 
 
-        #print(medial_N_force,l1,R)
-
         frictional_torque_2 = (( Data.µ * medial_N_force* Data.d_ext_drill ) / 2) + frictional_torque_2_change
 
-        #print(frictional_torque_2,l1,R)
+    
                     
         fat3_command = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_command) )* Data.lambd_command* lc*Data.g* np.sin(angle)
         fat3_heavy = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_heavypipe) )* Data.lambd_heavy* Data.lp*Data.g* np.sin(angle)
