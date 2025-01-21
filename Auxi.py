@@ -357,14 +357,14 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
         C3 = C1 - ( (1 - (Data.ro_fluid/Data.ro_drillpipe) )* Data.lambd_drill* Data.g*R )
 
-        medial_N_force  = -C3*( np.cos(angle_variation[condition_where_change])-np.cos(angle) ) - C2*(np.sin(angle_variation[condition_where_change]) - np.sin(angle)) - (K/Data.µ)*(np.exp(-Data.µ*angle_variation[condition_where_change])-np.exp(-Data.µ*angle))
+        medial_N_force  = -C3*( np.cos(angle_variation[condition_where_change])-np.cos(angle) ) + C2*(np.sin(angle_variation[condition_where_change]) - np.sin(angle)) - (K/Data.µ)*(np.exp(-Data.µ*angle_variation[condition_where_change])-np.exp(-Data.µ*angle))
 
         
         frictional_torque_2_change = - (( Data.µ * medial_N_force* Data.d_ext_drill ) / 2)
 
 
-        #print(angle*57.29,'angulo')
-        #print(angle_variation[condition_where_change]*57.29,'angulo de variação')
+        # print(angle*57.29,'angulo')
+        # print(angle_variation[condition_where_change]*57.29,'angulo de variação')
 
 
         tension_change = C1*np.sin(angle_variation[condition_where_change]) + C2*np.cos(angle_variation[condition_where_change]) + K*( np.exp(-Data.µ*(angle_variation[condition_where_change])) ) #CALCULA A TENSÃO NO PONTO QUE TROCOU O SINAL
@@ -381,8 +381,7 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
         frictional_torque_2 = (( Data.µ * medial_N_force* Data.d_ext_drill ) / 2) + frictional_torque_2_change
 
-        print(frictional_torque_2)
-        print(frictional_torque_2_change)
+    
                     
         fat3_command = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_command) )* Data.lambd_command* lc*Data.g* np.sin(angle)
         fat3_heavy = Data.µ* ( 1 - (Data.ro_fluid/Data.ro_heavypipe) )* Data.lambd_heavy* Data.lp*Data.g* np.sin(angle)
