@@ -361,12 +361,7 @@ def down_tension( Data, l1, R ) -> list : # Estimated tensions in descent
 
         
         frictional_torque_2_change = - (( Data.µ * medial_N_force* Data.d_ext_drill ) / 2)
-
-
-        # print(angle*57.29,'angulo')
-        # print(angle_variation[condition_where_change]*57.29,'angulo de variação')
-
-
+        
         tension_change = C1*np.sin(angle_variation[condition_where_change]) + C2*np.cos(angle_variation[condition_where_change]) + K*( np.exp(-Data.µ*(angle_variation[condition_where_change])) ) #CALCULA A TENSÃO NO PONTO QUE TROCOU O SINAL
 
     
