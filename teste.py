@@ -21,8 +21,8 @@ Data = DataSet(P0 = (0, 0), # X , Y
 
 l1,r = minimal_tension(Data)
 # l1_1,r_1 = minimal_torque(Data)
-drilling_informations_table(Data)
+# drilling_informations_table(Data)
 drilling_draw(Data)
-tension_in_radius(Data,l1)
-tension_in_section1(Data,r)
-tension_graphic(Data)
+# tension_in_radius(Data,l1)
+# tension_in_section1(Data,r)
+# tension_graphic(Data)
