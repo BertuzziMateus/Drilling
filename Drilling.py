@@ -11,9 +11,7 @@ def minimal_tension(Data) -> list:
     R_data = []
 
     l1 = 100
-
     condition =  False 
-
     while condition == False:
 
         t1_data_R = []
@@ -24,10 +22,8 @@ def minimal_tension(Data) -> list:
                 pass
             else: 
                 up_t1,*_ = ax.up_tension(Data,l1,R)
-                t1,t2,t3,torque = ax.down_tension(Data,l1,R)
                 t1_data_R.append(up_t1)
                 R_valor.append(R)
-
         if len(t1_data_R) != 0 :
             key_r = np.where(t1_data_R == min(t1_data_R))[0][0]
             t1_data.append(t1_data_R[key_r])
@@ -143,19 +139,19 @@ def drilling_draw(Data) -> None :
 
 
     custom_style = {
-        'font.size': 12,  # Tamanho adequado para leitura de gráficos
-        'axes.labelsize': 12,  # Tamanho dos rótulos dos eixos
+        'font.size': 16,  # Tamanho adequado para leitura de gráficos
+        'axes.labelsize': 18,  # Tamanho dos rótulos dos eixos
         'axes.titlesize': 14,  # Tamanho do título do gráfico
         'axes.linewidth': 1.5,  # Espessura das bordas dos gráficos
-        'xtick.labelsize': 12,  # Tamanho do texto dos ticks no eixo x
-        'ytick.labelsize': 12,  # Tamanho do texto dos ticks no eixo y
+        'xtick.labelsize': 18,  # Tamanho do texto dos ticks no eixo x
+        'ytick.labelsize': 18,  # Tamanho do texto dos ticks no eixo y
         'lines.linewidth': 2,  # Espessura das linhas dos gráficos
         'lines.markersize': 6,  # Tamanho dos marcadores
-        'legend.fontsize': 10,  # Tamanho da legenda
+        'legend.fontsize': 18,  # Tamanho da legenda
         'legend.frameon': False,  # Remove a moldura ao redor da legenda
         'legend.loc': 'best',  # Melhor posição automática para a legenda
-        'figure.figsize': (8, 6),  # Tamanho padrão da figura (polegadas)
-        'savefig.dpi': 600,  # Alta resolução para exportação (publicação)
+        'figure.figsize': (4, 3),  # Tamanho padrão da figura (polegadas)
+        'savefig.dpi': 1000,  # Alta resolução para exportação (publicação)
         'savefig.bbox': 'tight',  # Salva a imagem sem cortar parte do gráfico
         }
 
@@ -167,7 +163,7 @@ def drilling_draw(Data) -> None :
     #plt.title("Type 1 well trajectory for the minimal tension")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
 
@@ -177,13 +173,12 @@ def drilling_draw(Data) -> None :
     #plt.title("Type 1 well trajectory for the minimal Torque")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
 
 
     pass
-
 
 def tension_in_radius(Data,l1) -> list:
 
@@ -201,43 +196,42 @@ def tension_in_radius(Data,l1) -> list:
             torque_data.append(torque)
             R_valor.append(R)
 
-            #print(ax.buckling(Data,l1,R))
 
     custom_style = {
-        'font.size': 12,  # Tamanho adequado para leitura de gráficos
-        'axes.labelsize': 12,  # Tamanho dos rótulos dos eixos
+        'font.size': 16,  # Tamanho adequado para leitura de gráficos
+        'axes.labelsize': 18,  # Tamanho dos rótulos dos eixos
         'axes.titlesize': 14,  # Tamanho do título do gráfico
         'axes.linewidth': 1.5,  # Espessura das bordas dos gráficos
-        'xtick.labelsize': 12,  # Tamanho do texto dos ticks no eixo x
-        'ytick.labelsize': 12,  # Tamanho do texto dos ticks no eixo y
+        'xtick.labelsize': 18,  # Tamanho do texto dos ticks no eixo x
+        'ytick.labelsize': 18,  # Tamanho do texto dos ticks no eixo y
         'lines.linewidth': 2,  # Espessura das linhas dos gráficos
         'lines.markersize': 6,  # Tamanho dos marcadores
-        'legend.fontsize': 12,  # Tamanho da legenda
+        'legend.fontsize': 18,  # Tamanho da legenda
         'legend.frameon': False,  # Remove a moldura ao redor da legenda
         'legend.loc': 'best',  # Melhor posição automática para a legenda
-        'figure.figsize': (8, 6),  # Tamanho padrão da figura (polegadas)
-        'savefig.dpi': 600,  # Alta resolução para exportação (publicação)
+        'figure.figsize': (4, 3),  # Tamanho padrão da figura (polegadas)
+        'savefig.dpi': 1000,  # Alta resolução para exportação (publicação)
         'savefig.bbox': 'tight',  # Salva a imagem sem cortar parte do gráfico
         }
 
     plt.rcParams.update(custom_style)
 
     plt.plot(R_valor,t1_data_R, label=f'Tension in section of ${l1}m$', color="blue")
-    plt.title("Tension behavior across the radius")
+    #plt.title("Tension behavior across the radius")
     plt.xlabel("Radius ($m$)")
     plt.ylabel("Tension ($N/m²$)")
     plt.legend()
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
 
 
     plt.plot(R_valor,torque_data, label=f'Torque in section of ${l1}m$', color="red", linestyle="--")
-    plt.title("Torque behavior across the radius")
+    #plt.title("Torque behavior across the radius")
     plt.xlabel("Radius ($m$)")
     plt.ylabel("Torque ($N*m$)")
     plt.legend()
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
     
@@ -258,9 +252,6 @@ def tension_in_section1(Data,R) -> list:
             t1_data.append(up_t1)
             l1_data.append(l1)
             torque_data.append(torque)
-        
-        # if l1 == 1410:
-        #     print('a')
 
         if round(l1,1) == Data.max:
             condition = True
@@ -268,40 +259,41 @@ def tension_in_section1(Data,R) -> list:
             l1 += 10
 
     custom_style = {
-        'font.size': 12,  # Tamanho adequado para leitura de gráficos
-        'axes.labelsize': 12,  # Tamanho dos rótulos dos eixos
+        'font.size': 16,  # Tamanho adequado para leitura de gráficos
+        'axes.labelsize': 18,  # Tamanho dos rótulos dos eixos
         'axes.titlesize': 14,  # Tamanho do título do gráfico
         'axes.linewidth': 1.5,  # Espessura das bordas dos gráficos
-        'xtick.labelsize': 12,  # Tamanho do texto dos ticks no eixo x
-        'ytick.labelsize': 12,  # Tamanho do texto dos ticks no eixo y
+        'xtick.labelsize': 18,  # Tamanho do texto dos ticks no eixo x
+        'ytick.labelsize': 18,  # Tamanho do texto dos ticks no eixo y
         'lines.linewidth': 2,  # Espessura das linhas dos gráficos
         'lines.markersize': 6,  # Tamanho dos marcadores
-        'legend.fontsize': 12,  # Tamanho da legenda
+        'legend.fontsize': 18,  # Tamanho da legenda
         'legend.frameon': False,  # Remove a moldura ao redor da legenda
         'legend.loc': 'best',  # Melhor posição automática para a legenda
-        'figure.figsize': (8, 6),  # Tamanho padrão da figura (polegadas)
-        'savefig.dpi': 600,  # Alta resolução para exportação (publicação)
+        'figure.figsize': (4, 3),  # Tamanho padrão da figura (polegadas)
+        'savefig.dpi': 1000,  # Alta resolução para exportação (publicação)
         'savefig.bbox': 'tight',  # Salva a imagem sem cortar parte do gráfico
         }
+
 
     plt.rcParams.update(custom_style)
 
     plt.plot(l1_data,t1_data, label=f'Tension with radius of ${R}m$', color="blue")
-    plt.title("Tension behavior over the length of section one ")
+    #plt.title("Tension behavior over the length of section one ")
     plt.xlabel("Length ($m$)")
     plt.ylabel("Tension ($N/m²$)")
     plt.legend()
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
 
     
     plt.plot(l1_data,torque_data, label=f'Torque with radius of ${R}m$', color="red", linestyle="--")
-    plt.title("Torque behavior over the length of section one")
+    #plt.title("Torque behavior over the length of section one")
     plt.xlabel("Length ($m$)")
     plt.ylabel("Torque ($N*m$)")
     plt.legend()
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.margins(x=0.1, y=0.1)
     plt.show()
 
@@ -343,52 +335,49 @@ def tension_graphic(Data) -> list:
             R_data.append(R_valor[key_r])
             torque_data.append(torque_data_R[key_r1])
 
-
-
-
         if round(l1,1) == Data.max:
             condition = True
 
         l1 += 10
 
         custom_style = {
-        'font.size': 12,  # Tamanho adequado para leitura de gráficos
-        'axes.labelsize': 12,  # Tamanho dos rótulos dos eixos
-        'axes.titlesize': 14,  # Tamanho do título do gráfico
-        'axes.linewidth': 1.5,  # Espessura das bordas dos gráficos
-        'xtick.labelsize': 12,  # Tamanho do texto dos ticks no eixo x
-        'ytick.labelsize': 12,  # Tamanho do texto dos ticks no eixo y
-        'lines.linewidth': 2,  # Espessura das linhas dos gráficos
-        'lines.markersize': 6,  # Tamanho dos marcadores
-        'legend.fontsize': 12,  # Tamanho da legenda
-        'legend.frameon': False,  # Remove a moldura ao redor da legenda
-        'legend.loc': 'best',  # Melhor posição automática para a legenda
-        'figure.figsize': (8, 6),  # Tamanho padrão da figura (polegadas)
-        'savefig.dpi': 600,  # Alta resolução para exportação (publicação)
-        'savefig.bbox': 'tight',  # Salva a imagem sem cortar parte do gráfico
-        }
+            'font.size': 16,  # Tamanho adequado para leitura de gráficos
+            'axes.labelsize': 18,  # Tamanho dos rótulos dos eixos
+            'axes.titlesize': 14,  # Tamanho do título do gráfico
+            'axes.linewidth': 1.5,  # Espessura das bordas dos gráficos
+            'xtick.labelsize': 18,  # Tamanho do texto dos ticks no eixo x
+            'ytick.labelsize': 18,  # Tamanho do texto dos ticks no eixo y
+            'lines.linewidth': 2,  # Espessura das linhas dos gráficos
+            'lines.markersize': 6,  # Tamanho dos marcadores
+            'legend.fontsize': 18,  # Tamanho da legenda
+            'legend.frameon': False,  # Remove a moldura ao redor da legenda
+            'legend.loc': 'best',  # Melhor posição automática para a legenda
+            'figure.figsize': (4, 3),  # Tamanho padrão da figura (polegadas)
+            'savefig.dpi': 1000,  # Alta resolução para exportação (publicação)
+            'savefig.bbox': 'tight',  # Salva a imagem sem cortar parte do gráfico
+            }
+
 
     plt.rcParams.update(custom_style)
 
     plt.figure(figsize=(12, 6)) 
     plt.plot(l1_data,t1_data, label="Tension", color="blue",)
-    plt.title("Tension behavior depending on the best configurations for section 1", fontsize=10)
+    #plt.title("Tension behavior depending on the best configurations for section 1", fontsize=10)
     plt.xlabel("Length ($m$)")
     plt.ylabel("Tension ($N/m²$)")
     #plt.legend()
     plt.margins(x=0.1, y=0.1)
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.show()
 
 
     plt.plot(l1_data,torque_data, label="Torque", color="red", linestyle="--")
-    plt.title("Torque behavior depending on the best configurations for section 1", fontsize=10)
+    #plt.title("Torque behavior depending on the best configurations for section 1", fontsize=10)
     plt.xlabel("Length ($m$)")
     plt.ylabel("Torque ($N*m$)")
     #plt.legend()
     plt.margins(x=0.1, y=0.1)
-    plt.grid()
+    plt.grid(alpha=1,linewidth=2)
     plt.show()
-
 
     pass
