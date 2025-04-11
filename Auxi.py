@@ -116,6 +116,8 @@ def Nl(Data, l1, R) -> float:
     d_ext_heavy = Data.d_ext_heavy
     d_ext_drill = Data.d_ext_drill
     d_int_command = Data.d_int_command
+    d_int_heavy = Data.d_int_heavy
+    d_int_drill = Data.d_int_drill
     z = Data.z
     µ = Data.µ
     lp = Data.lp
@@ -129,7 +131,7 @@ def Nl(Data, l1, R) -> float:
 
     if neutral_line > lc:  # Neutral line is in heavy pipe
         Y_ic = Y_F - (lc * np.cos(angle))
-        fic = (ro_fluid * g * Y_ic * np.pi * (d_ext_command**2 - d_ext_heavy**2)) / 4
+        fic = ( ro_fluid * g * Y_ic * np.pi * ( (d_ext_command**2 - d_ext_heavy**2) - (d_int_command**2 - d_int_heavy**2) ) )    / 4
 
         A = (ff + z - fic) / (lambd_heavy * g * (np.cos(angle) - µ * (1 - (ro_fluid / ro_heavypipe)) * np.sin(angle)))
         B = lc * ((lambd_command - lambd_heavy) * np.cos(angle) - (µ * ((lambd_command * (1 - (ro_fluid / ro_command))) - (lambd_heavy * (1 - (ro_fluid / ro_heavypipe))))) * np.sin(angle))
@@ -139,7 +141,7 @@ def Nl(Data, l1, R) -> float:
 
         if neutral_line > (lc + lp):  # Neutral line is in drill
             Y_ip = Y_F - ((lc + lp) * np.cos(angle))
-            fip = (ro_fluid * g * Y_ip * np.pi * (d_ext_heavy**2 - d_ext_drill**2)) / 4
+            fip = (ro_fluid * g * Y_ip * np.pi *( (d_ext_heavy**2 - d_ext_drill**2) - (d_int_heavy**2 - d_int_drill**2 )    ) )   / 4
 
             A = (ff + z - fic - fip) / (lambd_drill * g * (np.cos(angle) - µ * (1 - (ro_fluid / ro_drillpipe)) * np.sin(angle)))
             B = lc * ((lambd_command - lambd_drill) * np.cos(angle) - (µ * ((lambd_command * (1 - (ro_fluid / ro_command))) - (lambd_drill * (1 - (ro_fluid / ro_drillpipe))))) * np.sin(angle))
@@ -165,6 +167,8 @@ def up_tension(Data, l1, R) -> list:  # Estimated tensions in upping
     d_ext_heavy = Data.d_ext_heavy
     d_ext_drill = Data.d_ext_drill
     d_int_command = Data.d_int_command
+    d_int_heavy = Data.d_int_heavy
+    d_int_drill = Data.d_int_drill
     µ = Data.µ
     lp = Data.lp
     P3 = Data.P3
@@ -178,8 +182,8 @@ def up_tension(Data, l1, R) -> list:  # Estimated tensions in upping
     Y_F = P3[1]
     Y_ic = Y_F - (lc * np.cos(angle))
     Y_ip = Y_F - ((lc + lp) * np.cos(angle))
-    fic = (ro_fluid * g * Y_ic * np.pi * (d_ext_command**2 - d_ext_heavy**2)) / 4
-    fip = (ro_fluid * g * Y_ip * np.pi * (d_ext_heavy**2 - d_ext_drill**2)) / 4
+    fic = ( ro_fluid * g * Y_ic * np.pi * ( (d_ext_command**2 - d_ext_heavy**2) - (d_int_command**2 - d_int_heavy**2) ) )    / 4
+    fip = (ro_fluid * g * Y_ip * np.pi *( (d_ext_heavy**2 - d_ext_drill**2) - (d_int_heavy**2 - d_int_drill**2 )    ) )   / 4
     ff = (ro_fluid * g * Y_F * (np.pi * (d_ext_command**2 - d_int_command**2) / 4))
 
     tension_3 = weight_3 * np.cos(angle) + µ * (weight_3 - buoyancy_3) * np.sin(angle) + fic + fip - ff
@@ -258,6 +262,8 @@ def down_tension(Data, l1, R) -> list:  # Estimated tensions in descent
     area_drill = Data.area_drill
     area_command = Data.area_command
     area_heavy = Data.area_heavy
+    d_int_heavy = Data.d_int_heavy
+    d_int_drill = Data.d_int_drill
     z = Data.z
 
     weight_3 = ((lambd_command * lc) + (lambd_heavy * lp) + (lambd_drill * (l3 - lc - lp))) * g
@@ -267,8 +273,8 @@ def down_tension(Data, l1, R) -> list:  # Estimated tensions in descent
     Y_ic = Y_F - (lc * np.cos(angle))
     Y_ip = Y_F - ((lc + lp) * np.cos(angle))
     ff = (ro_fluid * g * Y_F * (np.pi * (d_ext_command**2 - d_int_command**2) / 4))
-    fic = (ro_fluid * g * Y_ic * np.pi * (d_ext_command**2 - d_ext_heavy**2)) / 4
-    fip = (ro_fluid * g * Y_ip * np.pi * (d_ext_heavy**2 - d_ext_drill**2)) / 4
+    fic = ( ro_fluid * g * Y_ic * np.pi * ( (d_ext_command**2 - d_ext_heavy**2) - (d_int_command**2 - d_int_heavy**2) ) )    / 4
+    fip = (ro_fluid * g * Y_ip * np.pi *( (d_ext_heavy**2 - d_ext_drill**2) - (d_int_heavy**2 - d_int_drill**2 )    ) )   / 4
 
     tension_3 = weight_3 * (np.cos(angle) - µ * np.sin(angle)) + (µ * buoyancy_3 * np.sin(angle)) + fic + fip - z - ff
 

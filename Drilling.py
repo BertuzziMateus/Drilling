@@ -160,7 +160,7 @@ def drilling_draw(Data) -> None :
     plt.axes().set_aspect('equal')
     plt.plot(x1, y1, color="blue")
     plt.gca().invert_yaxis()
-    #plt.title("Type 1 well trajectory for the minimal tension")
+    plt.title("Type 1 well trajectory for the minimal tension")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
     plt.grid(alpha=1,linewidth=2)
@@ -170,7 +170,7 @@ def drilling_draw(Data) -> None :
     plt.axes().set_aspect('equal')
     plt.plot(x2, y2, color="red", linestyle="--")
     plt.gca().invert_yaxis()
-    #plt.title("Type 1 well trajectory for the minimal Torque")
+    plt.title("Type 1 well trajectory for the minimal Torque")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
     plt.grid(alpha=1,linewidth=2)
@@ -217,7 +217,7 @@ def tension_in_radius(Data,l1) -> list:
     plt.rcParams.update(custom_style)
 
     plt.plot(R_valor,t1_data_R, label=f'Tension in section of ${l1}m$', color="blue")
-    #plt.title("Tension behavior across the radius")
+    plt.title("Tension behavior across the radius")
     plt.xlabel("Radius ($m$)")
     plt.ylabel("Tension ($N/m²$)")
     plt.legend()
@@ -227,7 +227,7 @@ def tension_in_radius(Data,l1) -> list:
 
 
     plt.plot(R_valor,torque_data, label=f'Torque in section of ${l1}m$', color="red", linestyle="--")
-    #plt.title("Torque behavior across the radius")
+    plt.title("Torque behavior across the radius")
     plt.xlabel("Radius ($m$)")
     plt.ylabel("Torque ($N*m$)")
     plt.legend()
@@ -279,7 +279,7 @@ def tension_in_section1(Data,R) -> list:
     plt.rcParams.update(custom_style)
 
     plt.plot(l1_data,t1_data, label=f'Tension with radius of ${R}m$', color="blue")
-    #plt.title("Tension behavior over the length of section one ")
+    plt.title("Tension behavior over the length of section one ")
     plt.xlabel("Length ($m$)")
     plt.ylabel("Tension ($N/m²$)")
     plt.legend()
@@ -289,7 +289,7 @@ def tension_in_section1(Data,R) -> list:
 
     
     plt.plot(l1_data,torque_data, label=f'Torque with radius of ${R}m$', color="red", linestyle="--")
-    #plt.title("Torque behavior over the length of section one")
+    plt.title("Torque behavior over the length of section one")
     plt.xlabel("Length ($m$)")
     plt.ylabel("Torque ($N*m$)")
     plt.legend()
@@ -362,20 +362,20 @@ def tension_graphic(Data) -> list:
 
     plt.figure(figsize=(12, 6)) 
     plt.plot(l1_data,t1_data, label="Tension", color="blue",)
-    #plt.title("Tension behavior depending on the best configurations for section 1", fontsize=10)
+    plt.title("Tension behavior depending on the best configurations for section 1", fontsize=10)
     plt.xlabel("Length ($m$)")
     plt.ylabel("Tension ($N/m²$)")
-    #plt.legend()
+    plt.legend()
     plt.margins(x=0.1, y=0.1)
     plt.grid(alpha=1,linewidth=2)
     plt.show()
 
 
     plt.plot(l1_data,torque_data, label="Torque", color="red", linestyle="--")
-    #plt.title("Torque behavior depending on the best configurations for section 1", fontsize=10)
+    plt.title("Torque behavior depending on the best configurations for section 1", fontsize=10)
     plt.xlabel("Length ($m$)")
     plt.ylabel("Torque ($N*m$)")
-    #plt.legend()
+    plt.legend()
     plt.margins(x=0.1, y=0.1)
     plt.grid(alpha=1,linewidth=2)
     plt.show()
