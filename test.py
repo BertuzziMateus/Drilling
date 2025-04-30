@@ -1,6 +1,5 @@
-from Minimal import *
+from mains import *
 
-from Data_base import mesh
 
 
 Data = DataSet(P0 = (0, 0), # X , Y
@@ -18,27 +17,55 @@ Data = DataSet(P0 = (0, 0), # X , Y
                 max = 2300,
                 radius= (100,600)
                 )
-
-Mesh = mesh(
-    sandstone =[[0,100],[400,500]],
-    dolomite =[[100,200]],
-    evaporite =[[200,300]],
-    limestone =[[300,400]],
-    )
-            
-    
-
+       
+litologia  = [
+    ['Sandstone',500],
+    ['Dolomite',1000],
+    ['Evaporite',1000],
+    ['Limestone',400],
+    ['Sandstone',100]
+    ]
 
 
+def lithology(date):
 
-l1,r = minimal_tension(Data)
-drilling_informations_table(Data)
-drilling_draw(Data)
-tension_graphic(Data)
+    rocks = []
+    dx_rocks = []
+
+    for element in date:
+
+        if type(element[0]) != str:
+            raise TypeError("The first element of the list must be a Sandstone, Limestone, Dolomite or Evaporite")
+        else:
+            rocks.append(element[0])
+            dx_rocks.append(element[1])
+
+    return [rocks,dx_rocks]
+
+print(lithology(litologia))
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# l1,r = minimal_tension(Data)
+# drilling_informations_table(Data)
+# drilling_draw(Data)
+# tension_graphic(Data)
 #l1_1,r_1 = minimal_torque(Data)
 #tension_in_radius(Data,l1_1)
 #tension_in_section1(Data,r_1)
