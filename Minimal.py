@@ -1,4 +1,4 @@
-import Auxi as ax
+import Auxiliaries as ax
 import matplotlib.pyplot as plt
 import numpy as np
 from Data_base import DataSet
