@@ -1,4 +1,4 @@
-from Drilling import *
+from Minimal import *
 
 from Data_base import mesh
 
@@ -32,13 +32,17 @@ Mesh = mesh(
 
 
 l1,r = minimal_tension(Data)
-# #l1_1,r_1 = minimal_torque(Data)
 drilling_informations_table(Data)
 drilling_draw(Data)
-# #tension_in_radius(Data,l1_1)
-# #tension_in_section1(Data,r_1)
 tension_graphic(Data)
-# #tension_in_radius(Data,l1_1)
-# #tension_in_section1(Data,r_1)
+
+
+
+
+#l1_1,r_1 = minimal_torque(Data)
+#tension_in_radius(Data,l1_1)
+#tension_in_section1(Data,r_1)
+#tension_in_radius(Data,l1_1)
+#tension_in_section1(Data,r_1)
 
 
