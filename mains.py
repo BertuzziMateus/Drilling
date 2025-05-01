@@ -1,5 +1,5 @@
 import Auxiliaries as ax
-from Data_base import *
+from Datas import *
 import numpy as np
 
 def minimal_tension(Data) -> list:
@@ -79,18 +79,3 @@ def minimal_torque(Data) -> list:
     R_value = R_data[key]
 
     return [l1_value,R_value]
-
-def lithology(date):
-
-    litology_dict = dict()
-
-    for element in date:
-
-        if type(element[0]) != str:
-            raise TypeError("The first element of the list must be a Sandstone, Limestone, Dolomite or Evaporite")
-        else:
-            rock = element[0]
-
-        litology_dict[rock] = element[1]
-
-    return litology_dict

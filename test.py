@@ -1,8 +1,7 @@
 from mains import *
 
 
-
-Data = DataSet(P0 = (0, 0), # X , Y
+Data = Well_data(P0 = (0, 0), # X , Y
                 P3 = (1000, 3000),  # X , Y
                 ro_fluid = 1737.5 , #kg / m^3 
                 ro_command = 8000, #kg / m^3 
@@ -19,45 +18,14 @@ Data = DataSet(P0 = (0, 0), # X , Y
                 )
        
 litologia  = [
-    ['Sandstone',500],
-    ['Dolomite',1000],
-    ['Evaporite',1000],
-    ['Limestone',400],
-    ['Sandstone',100]
-    ]
+    ['Sandstone', 500],
+    ['Limestone', 400],
+    ['Evaporite', 1000],
+    ['Dolomite', 1000],
+    ['Sandstone', 100],
+]
 
-
-def lithology(date):
-
-    rocks = []
-    dx_rocks = []
-
-    for element in date:
-
-        if type(element[0]) != str:
-            raise TypeError("The first element of the list must be a Sandstone, Limestone, Dolomite or Evaporite")
-        else:
-            rocks.append(element[0])
-            dx_rocks.append(element[1])
-
-    return [rocks,dx_rocks]
-
-print(lithology(litologia))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+lithology_mesh = Lithology_mesh(Data,litologia)
 
 
 

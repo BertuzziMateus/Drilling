@@ -1,7 +1,7 @@
 
 import numpy as np
 
-class DataSet:
+class Well_data:
 
     def __init__(self,
                 P0 : tuple[float,float], # X and Y coordenates from the initial point
@@ -52,31 +52,106 @@ class DataSet:
         pass
 
 
-class lithology:
 
-    def Sandstone(self,
-            rop: int,
-            ):
-        self.rop = rop
-        return None
+class Lithology_mesh:
+    def __init__(self, well_data, list_lithology) -> None:
+        self.list_lithology = list_lithology
+        
+        def make_mesh(litho_list):
+            mesh_height = []
+            mesh_lithology = []
+            for element in litho_list:
+                mesh_height.append(element[1])
+                mesh_lithology.append(element[0])
+            return mesh_height, mesh_lithology
+        
+        
+        self.mesh_height, self.mesh_lithology = make_mesh(list_lithology)
+
+        mesh = []
+        for element in self.mesh_height:
+            mesh.append(element)
+        
+        self.mesh_height = mesh
+
+
+
+Sandstone = {
+    'rop': 20,
+    'color': 'yellow'
+}
+
+Limestone = {
+    'rop': 30,
+    'color': '48d1cc'
+}
+
+Dolomite = {
+    'rop': 15,
+    'color': '53c5ec'
+}
+
+
+Evaporite = {
+    'rop': 10,
+    'color': '799fbf'
+} 
+
+
+
+
+
+
+        
+
     
-    def Limestone(self,
-        rop: int,
-        ):
-        self.rop  = rop
-        return None
 
-    def Dolomite(self,
-        rop: int,
-        ):
-        self.rop = rop
-        return None
     
-    def Evaporite(self,
-        rop: int,
-        ):
-        self.rop = rop
-        return None
 
-    pass
 
+
+        
+
+
+
+
+
+
+
+
+
+# class Rock:
+
+#     class Sandstone:
+
+#         def __init__(self,
+#                 color : str,
+#                 ):
+#             self.rop = 20
+#             self.color = color
+#             return None
+#         pass
+
+#     class Limestone:   
+#         def Limestone(self,
+#             color: str = '48d1cc',
+#             ):
+#             self.rop  = 30
+#             return None
+
+#     class Dolomite:  
+#         def Dolomite(self,
+#             color: str = '53c5ec',
+#             ):
+#             self.rop = 15
+#             return None
+        
+#     class Evaporite:
+#         def Evaporite(self,
+#             color: str = '799fbf',
+#             ):
+#             self.rop = 10
+#             return None
+
+#         pass
+    
