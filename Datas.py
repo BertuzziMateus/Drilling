@@ -83,7 +83,13 @@ Colors_rocks = {
     'Shale': '#40ff00',
 }
 
-
+Rop_rocks = {
+    'Sandstone': 13, #ft/h
+    'Limestone': 13, #ft/h
+    'Dolomite': 30, #ft/h
+    'Evaporite': 55, #ft/h
+    'Shale': 10, #ft/h
+}
 
 
 

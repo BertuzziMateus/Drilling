@@ -79,3 +79,51 @@ def minimal_torque(Data) -> list:
     R_value = R_data[key]
 
     return [l1_value,R_value]
+
+
+def time_drilling(Data,l1,R,Lithology) -> float:
+
+    l1,l2,l3 = ax.lenght(Data,l1,R)
+
+    total_length = l1 + l2 + l3
+
+    lithology_mesh = Lithology_mesh(Data,Lithology)
+    mesh = lithology_mesh.mesh
+    mesh_lithology = lithology_mesh.mesh_lithology
+
+    time_in_hours = 0.0
+
+    for i in range(len(mesh)):
+        lithology  = mesh_lithology[i]
+        height = mesh[i]
+        rop = Rop_rocks[lithology]
+        time = height / rop
+        time_in_hours += time
+
+    print(f'Time in hours: {time_in_hours:.2f}')
+    print(f'Time in days: {(time_in_hours/24):.2f}')
+
+    return time_in_hours
+
+
+def time_drilling_real(Data,l1,R,Lithology) -> float:
+
+    l1,l2,l3 = ax.lenght(Data,l1,R)
+
+    total_length = l1 + l2 + l3
+
+    lithology_mesh = Lithology_mesh(Data,Lithology)
+    mesh = lithology_mesh.mesh
+    mesh_lithology = lithology_mesh.mesh_lithology
+
+    dx = 0.0
+
+    while round(dx)!= round(total_length):
+
+        
+
+
+        dx += 1
+
+
+
