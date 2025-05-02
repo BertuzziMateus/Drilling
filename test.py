@@ -1,4 +1,6 @@
 from mains import *
+from Results import *
+
 
 
 Data = Well_data(P0 = (0, 0), # X , Y
@@ -11,7 +13,7 @@ Data = Well_data(P0 = (0, 0), # X , Y
                 diameters_drillpipe = (0.127,  0.1086104), # m 5 e 4.276
                 diameters_heavypipe = (0.1524,  0.1143), # m 6 e 4
                 µ = 0.23, # 
-                z = (5000*8) * 4.44822 , # Newton
+                z = (1000*8) * 4.44822 , # Newton
                 lp = 36, # m 
                 max = 2300,
                 radius= (100,600)
@@ -25,14 +27,13 @@ litologia  = [
     ['Sandstone', 100],
 ]
 
-lithology_mesh = Lithology_mesh(Data,litologia)
 
 
 
 
-# l1,r = minimal_tension(Data)
-# drilling_informations_table(Data)
-# drilling_draw(Data)
+#l1,r = minimal_tension(Data)
+drilling_informations_table(Data)
+drilling_draw(Data,litologia)
 # tension_graphic(Data)
 #l1_1,r_1 = minimal_torque(Data)
 #tension_in_radius(Data,l1_1)

@@ -2,6 +2,7 @@ import Auxiliaries as ax
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.colors import ListedColormap, BoundaryNorm
 from mains import *
 
 
@@ -55,12 +56,24 @@ def drilling_informations_table(data):
 
     pass
 
-def drilling_draw(Data) -> None :
+def drilling_draw(Data,Lithology) -> None :
 
     l1, R = minimal_tension(Data)
     x1, y1 = ax.points_coordinates(Data, l1, R)
     l2, R2 = minimal_torque(Data)
     x2, y2 = ax.points_coordinates(Data, l2, R2)
+
+    lithology_mesh = Lithology_mesh(Data,Lithology)
+    mesh = lithology_mesh.mesh
+    mesh_lithology = lithology_mesh.mesh_lithology
+
+    colors = []
+
+
+    for element in mesh_lithology:
+        colors.append(element)
+
+ 
 
 
     custom_style = {
@@ -81,15 +94,23 @@ def drilling_draw(Data) -> None :
         }
 
     plt.rcParams.update(custom_style)
-
     plt.axes().set_aspect('equal')
-    plt.plot(x1, y1, color="blue")
+    plt.plot(x1, y1, color="k") 
     plt.gca().invert_yaxis()
     plt.title("Type 1 well trajectory for the minimal tension")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
-    plt.grid(alpha=1,linewidth=2)
-    plt.margins(x=0.1, y=0.1)
+    plt.grid(alpha=0.7)
+    mesh_old = 0
+    sum_mesh = mesh[0]
+    for i in range(len(mesh)):
+        plt.axhspan(mesh_old, sum_mesh, color=Colors_rocks[mesh_lithology[i]], alpha=0.5, label=mesh_lithology[i])
+        mesh_old += mesh[i]
+        if i == len(mesh)-1:
+            sum_mesh += mesh[i]
+        else:
+            sum_mesh += mesh[i+1]
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.show()
 
     plt.axes().set_aspect('equal')
@@ -98,8 +119,17 @@ def drilling_draw(Data) -> None :
     plt.title("Type 1 well trajectory for the minimal Torque")
     plt.xlabel("Distance ($m$)")
     plt.ylabel("Depth ($m$)")
-    plt.grid(alpha=1,linewidth=2)
-    plt.margins(x=0.1, y=0.1)
+    plt.grid(alpha=0.7)
+    mesh_old = 0
+    sum_mesh = mesh[0]
+    for i in range(len(mesh)):
+        plt.axhspan(mesh_old, sum_mesh, color=Colors_rocks[mesh_lithology[i]], alpha=0.5, label=mesh_lithology[i])
+        mesh_old += mesh[i]
+        if i == len(mesh)-1:
+            sum_mesh += mesh[i]
+        else:
+            sum_mesh += mesh[i+1]
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.show()
 
 

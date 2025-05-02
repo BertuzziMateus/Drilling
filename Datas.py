@@ -72,30 +72,17 @@ class Lithology_mesh:
         for element in self.mesh_height:
             mesh.append(element)
         
-        self.mesh_height = mesh
+        self.mesh = mesh
 
 
-
-Sandstone = {
-    'rop': 20,
-    'color': 'yellow'
+Colors_rocks = {
+    'Sandstone': '#ffff40',
+    'Limestone': '#00efef',
+    'Dolomite': '#00bfcf',
+    'Evaporite': '#799fbf',
+    'Shale': '#40ff00',
 }
 
-Limestone = {
-    'rop': 30,
-    'color': '48d1cc'
-}
-
-Dolomite = {
-    'rop': 15,
-    'color': '53c5ec'
-}
-
-
-Evaporite = {
-    'rop': 10,
-    'color': '799fbf'
-} 
 
 
 
