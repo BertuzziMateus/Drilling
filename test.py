@@ -1,4 +1,4 @@
-from mains import *
+from Mains import *
 from Results import *
 
 

@@ -2,8 +2,7 @@ import Auxiliaries as ax
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib.colors import ListedColormap, BoundaryNorm
-from mains import *
+from Mains import *
 
 
 def drilling_informations(Data)->list:
