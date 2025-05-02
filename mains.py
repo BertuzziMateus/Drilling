@@ -113,17 +113,14 @@ def time_drilling_real(Data,l1,R,Lithology) -> float:
     total_length = l1 + l2 + l3
 
     lithology_mesh = Lithology_mesh(Data,Lithology)
+    print(total_length)
     mesh = lithology_mesh.mesh
     mesh_lithology = lithology_mesh.mesh_lithology
 
-    dx = 0.0
 
-    while round(dx)!= round(total_length):
-
-        
+                 
 
 
-        dx += 1
 
 
 

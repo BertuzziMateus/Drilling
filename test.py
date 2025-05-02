@@ -32,9 +32,10 @@ litologia  = [
 
 
 l1,r = minimal_tension(Data)
-#drilling_informations_table(Data)
+drilling_informations_table(Data)
 drilling_draw(Data,litologia)
 time_drilling(Data,l1,r,litologia)
+#time_drilling_real(Data,l1,r,litologia)
 # tension_graphic(Data)
 #l1_1,r_1 = minimal_torque(Data)
 #tension_in_radius(Data,l1_1)

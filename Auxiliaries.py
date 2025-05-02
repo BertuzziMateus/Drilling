@@ -81,6 +81,7 @@ def points_coordinates( Data,l1,R) -> list : # Estimated points in well
 def buckling( Data, l1, R ) -> float:
 
     PSB = Data.z
+    #PSB  = 5000 * 4.44822 * Data.d_ext_command*39
     
     alpha =  1 - ((Data.ro_fluid) / (Data.ro_command))
     ws = Data.lambd_command
