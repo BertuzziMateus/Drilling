@@ -40,5 +40,3 @@ l1, r = minimal_tension(Data)
 # l1_1,r_1 = minimal_torque(Data)
 time_drilling_real(Data, l1, r, litologia)
 
-
-print(l1)

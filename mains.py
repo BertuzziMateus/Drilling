@@ -82,10 +82,6 @@ def minimal_torque(Data) -> list:
 
 def time_drilling(Data, l1, R, Lithology) -> float:
 
-    l1, l2, l3 = ax.lenght(Data, l1, R)
-
-    total_length = l1 + l2 + l3
-
     lithology_mesh = Lithology_mesh(Data, Lithology)
     mesh = lithology_mesh.mesh
     mesh_lithology = lithology_mesh.mesh_lithology
@@ -108,58 +104,73 @@ def time_drilling(Data, l1, R, Lithology) -> float:
 def time_drilling_real(Data, l1, R, Lithology) -> float:
 
     l1, l2, l3 = ax.lenght(Data, l1, R)
-
-    angle = ax.theta(Data,l1,R)
-
+    angle = ax.theta(Data, l1, R)
     lithology_mesh = Lithology_mesh(Data, Lithology)
 
     mesh = lithology_mesh.mesh
     mesh_lithology = lithology_mesh.mesh_lithology
-
-    mes = dict()
-
+    grid_dict = dict()
     sum_l = 0
     indictor = 0
+
     for element in mesh:
-        
-
         for _ in range(element):
+            grid_dict[f'{sum_l}'] = f'{mesh_lithology[indictor]}'
+            sum_l += 1
+        grid_dict[f'{sum_l}'] = f'{mesh_lithology[indictor]}'
+        indictor += 1
 
-            mes[f'{sum_l}'] = f'{mesh_lithology[indictor]}'
-            sum_l+=1
+    l3_v = (l3*np.cos(angle))
+    l2_v = Data.P3[1] - l1 - l3_v
 
+    l1_v_for_dict = np.arange(0, l1, 1)
+    l2_v_for_dict = np.round(np.arange(l1, l1 + l2_v, 1))
+    l3_v_for_dict = np.round(np.arange(l1+l2_v, l1+l2_v+l3_v, 1))
 
-        mes[f'{sum_l}'] = f'{mesh_lithology[indictor]}'
-        indictor+=1
+    time_l1 = 0
+    for element in l1_v_for_dict:
+        lithology_type = grid_dict[f'{element}']
+        time_l1 += 1*Rop_rocks[lithology_type]
+
+    l2_vec = np.round(np.linspace(l1, l1+l2, len(l2_v_for_dict)))
+
+    count = 0
+    time_l2 = 0
+    for element in l2_v_for_dict:
+        lithology_type = grid_dict[f'{int(element)}']
+
+        if count == 0:
+            part1 = l2_vec[count]
+            part2 = l1
+        else:
+            part1 = l2_vec[count]
+            part2 = l2_vec[count-1]
+
+        x_l2 = part1 - part2
+        time_l2 += x_l2*Rop_rocks[lithology_type]
+        count += 1
+
+    l3_vec = np.round(np.linspace(l1+l2, l1+l2+l3, len(l3_v_for_dict)))
+
+    count = 0
+    time_l3 = 0
+    for element in l3_v_for_dict:
+
+        if count == 0:
+            part1 = l3_vec[count]
+            part2 = l1+l2
+        else:
+            part1 = l3_vec[count]
+            part2 = l3_vec[count-1]
+
+        lithology_type = grid_dict[f'{int(element)}']
+        x_l3 = part1 - part2
+        time_l3 += x_l3*Rop_rocks[lithology_type]
+        count += 1
         
-    total_len = round(l1+l2+l3)
+    time_h = time_l1+time_l2+time_l3
 
-    sum_p= 0
-    time  = 0
+    print(f'Time in hours: {time_h:.2f}')
+    print(f'Time in days: {(time_h/24):.2f}')
 
-    for _ in range(l1):
-        malha = mes[f'{sum_p}']
-        rop = Rop_rocks[malha]
-        time += rop*1
-        sum_p += 1
-
-    angle_variation = np.arange(0.01, angle, 0.01)
-    l2_vector = np.linspace(0,l2,len(angle_variation))
-
-
-    print(angle_variation)
-
-
-    for i in range(len(angle_variation)):
-        a = (l1+(l2_vector[i]*np.cos(angle_variation[i])))
-        print(a)
-        
-
-    l3_vector =  np.linspace(0,l3,1000)
-    for i in range(len(l3_vector)):
-        b = (a + l3_vector[i]*np.cos(angle))
-        print(b)
-
-
-
-    print(time)
+    return time_h

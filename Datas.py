@@ -93,7 +93,7 @@ class Sandstone:
         a = 3.14e-7
         b = 94.58
         rop = a*b
-        self.rop = 10 #m/h
+        self.rop = 1/10 #m/h
     pass
 pass
 
@@ -103,7 +103,7 @@ class Limestone:
         a = 2.33e-7
         b = 92.31
         rop = a*b
-        self.rop = 10
+        self.rop = 1/10
     pass
 pass
 
@@ -114,7 +114,7 @@ class Evaporite:
         a =1.74e-7
         b = 93.85
         rop = a*b
-        self.rop = 10
+        self.rop = 1/10
     pass
 pass
 class Shale:
@@ -123,7 +123,7 @@ class Shale:
         a = 3.54e-7
         b = 76.14
         rop = a*b
-        self.rop = 10
+        self.rop = 1/10
     pass
 pass
 
