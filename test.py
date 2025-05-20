@@ -12,7 +12,7 @@ Data = Well_data(P0=(0, 0),  # X , Y
                  diameters_drillpipe=(0.127,  0.1086104),  # m 5 e 4.276
                  diameters_heavypipe=(0.1524,  0.1016),  # m 6 e 4
                  µ=0.23,
-                 z=(1000*8) * 4.44822,  # Newton
+                 z=(5000*8) * 4.44822,  # Newton
                  lp=36,  # m
                  max=2300,
                  radius=(100, 600)
@@ -26,17 +26,8 @@ litologia = [
     ['Sandstone', 100],
 ]
 
-
-# a=  Evaporite().rop
-# print(a)
-l1, r = minimal_tension(Data)
-# drilling_informations_table(Data)
-#drilling_draw(Data,litologia)
+results(Data,litologia)
+Results_for_drilling(Data)
 
 
-# tension_in_radius(Data,l1)
-# tension_in_section1(Data,r)
-# tension_graphic(Data)
-# l1_1,r_1 = minimal_torque(Data)
-time_drilling_real(Data, l1, r, litologia)
 
