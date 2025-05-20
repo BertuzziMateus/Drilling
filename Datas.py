@@ -78,21 +78,63 @@ class Lithology_mesh:
 Colors_rocks = {
     'Sandstone': '#ffff40',
     'Limestone': '#00efef',
-    'Dolomite': '#00bfcf',
+    #'Dolomite': '#00bfcf',
     'Evaporite': '#799fbf',
     'Shale': '#40ff00',
 }
 
+
+
+
+
+class Sandstone:
+    def __init__(self,
+                 ) -> None:
+        a = 3.14e-7
+        b = 94.58
+        rop = a*b
+        self.rop = 10 #m/h
+    pass
+pass
+
+class Limestone:
+    def __init__(self,
+                 ) -> None:
+        a = 2.33e-7
+        b = 92.31
+        rop = a*b
+        self.rop = 10
+    pass
+pass
+
+class Evaporite:
+    def __init__(self,
+                 ) -> None:
+        
+        a =1.74e-7
+        b = 93.85
+        rop = a*b
+        self.rop = 10
+    pass
+pass
+class Shale:
+    def __init__(self,
+                 ) -> None:
+        a = 3.54e-7
+        b = 76.14
+        rop = a*b
+        self.rop = 10
+    pass
+pass
+
+
 Rop_rocks = {
-    'Sandstone': 13, #ft/h
-    'Limestone': 13, #ft/h
-    'Dolomite': 30, #ft/h
-    'Evaporite': 55, #ft/h
-    'Shale': 10, #ft/h
+    'Sandstone': Sandstone().rop, #ft/h
+    'Limestone': Limestone().rop, #ft/h
+    #'Dolomite': 30, #ft/h
+    'Evaporite': Evaporite().rop, #ft/h
+    'Shale': Shale().rop, #ft/h
 }
-
-
-
 
 
         
