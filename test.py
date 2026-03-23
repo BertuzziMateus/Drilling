@@ -25,11 +25,7 @@ Mesh = mesh(
     evaporite =[[200,300]],
     limestone =[[300,400]],
     )
-            
-    
-
-
-
+      
 
 l1,r = minimal_tension(Data)
 drilling_informations_table(Data)
